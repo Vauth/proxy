@@ -1,0 +1,41 @@
+name: Proxy Updater
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Install Python 3
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        
+    - name: Install Dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install requests
+        
+    - name: Create Proxy
+      run: |
+        rm -rf proxy.txt
+        python3 resources/updater.py
+        
+    - name: Commit Files
+      run: |
+        git config --local user.email "49699333+dependabot[bot]@users.noreply.github.com"
+        git config --local user.name "dependabot[bot]"
+        git add proxy.txt
+        git commit -am "UPDATE"
+        
+    - name: Push Changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        CI: true
