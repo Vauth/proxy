@@ -52,7 +52,7 @@ class ProxyChecker:
     def Check(self, proxy):
         try:
             testcase = 'http://connectivitycheck.gstatic.com/generate_204'
-            response = requests.get(testcase, proxies={'http': proxy, 'https': proxy}, timeout=5)
+            response = requests.get(testcase, proxies={'http': proxy, 'https': proxy}, timeout=3)
             if response.status_code == 204:
                 with self.lock: self.valid_proxies.append(proxy)
                 print("[+] {} UP".format(proxy))
