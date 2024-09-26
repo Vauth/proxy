@@ -85,5 +85,6 @@ class ProxyChecker:
 
 # Run the main program
 proxies = (Providers()).Retrieve()
+print('\n[info] Total proxies: {}\n'.format(len(proxies)))
 checker = (ProxyChecker(proxies)).Run()
 with open('proxy.txt', 'w') as f: f.write('\n'.join(checker))
