@@ -4,6 +4,9 @@ import re
 import requests
 import threading
 
+# Disable warnings for clean output
+requests.packages.urllib3.disable_warnings()
+
 # Retrieve bulk proxy list
 class Providers:
     def __init__(self):
