@@ -13,34 +13,34 @@ class Providers:
         self.all_proxies = []
 
     def NovaProxy(self):
-        response = requests.get('https://api.proxynova.com/proxy/find?url=https://www.proxynova.com/proxy-server-list/country-cn/', verify=True)
+        response = requests.get('https://api.proxynova.com/proxy/find?url=https://www.proxynova.com/proxy-server-list/country-cn/', verify=False)
         [self.all_proxies.append(f"{ii['ip']}:{ii['port']}") for ii in response.json()['proxies']]
         print("[+] Retrieved (NovaProxy)")
 
     def DitaProxy(self):
-        response = requests.get(f'https://api.ditatompel.com/v1/proxy/country/cn?page=1&limit=100', verify=True)
+        response = requests.get(f'https://api.ditatompel.com/v1/proxy/country/cn?page=1&limit=100', verify=False)
         [self.all_proxies.append(i['type'].lower()+'://'+i['ip']+':'+str(i['port'])) for i in response.json()['data']['items']]
         print("[+] Retrieved (DitaProxy)")
 
     def ScrapeProxy(self):
-        response = requests.get('https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&country=cn&proxy_format=protocolipport&format=json', verify=True)
+        response = requests.get('https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&country=cn&proxy_format=protocolipport&format=json', verify=False)
         [self.all_proxies.append(i['protocol'].lower()+'://'+i['ip']+':'+str(i['port'])) for i in response.json()['proxies']]
         print("[+] Retrieved (ScrapeProxy)")
 
     def EliteProxy(self):
-        nonce = re.search(r'"nonce":"(.*?)"', requests.get('https://proxyelite.info/free-proxy-list/', verify=True).text).group(1)
+        nonce = re.search(r'"nonce":"(.*?)"', requests.get('https://proxyelite.info/free-proxy-list/', verify=False).text).group(1)
         filters = {"country": "China", "latency": 0, "page_size": 100, "page": 1}
-        response = requests.get(f'https://proxyelite.info/wp-admin/admin-ajax.php?action=proxylister_download&nonce={nonce}&format=txt&filter={filters}', verify=True).text.splitlines()
+        response = requests.get(f'https://proxyelite.info/wp-admin/admin-ajax.php?action=proxylister_download&nonce={nonce}&format=txt&filter={filters}', verify=False).text.splitlines()
         [self.all_proxies.append('http://'+i) for i in response]
         print("[+] Retrieved (EliteProxy)")
 
     def FreeonlyProxy(self):
-        response = requests.get('https://proxyfreeonly.com/api/free-proxy-list?limit=500&page=1&country=CN&sortBy=lastChecked&sortType=desc', verify=True)
+        response = requests.get('https://proxyfreeonly.com/api/free-proxy-list?limit=500&page=1&country=CN&sortBy=lastChecked&sortType=desc', verify=False)
         [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()]
         print("[+] Retrieved (Freeonly)")
 
     def PdbProxy(self):
-        response = requests.post('https://proxydb.net/list', data={'country': 'CN'}, verify=True)
+        response = requests.post('https://proxydb.net/list', data={'country': 'CN'}, verify=False)
         [self.all_proxies.append(i['type'].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['proxies']]
         print("[+] Retrieved (Pdb)")
 
@@ -67,7 +67,7 @@ class ProxyChecker:
     def Check(self, proxy):
         try:
             testcase = 'http://connectivitycheck.gstatic.com/generate_204'
-            response = requests.get(testcase, proxies={'http': proxy, 'https': proxy}, timeout=3, verify=True)
+            response = requests.get(testcase, proxies={'http': proxy, 'https': proxy}, timeout=3, verify=False)
             if response.status_code == 204:
                 with self.lock: self.valid_proxies.append(proxy)
                 print("[+] {} UP".format(proxy))
