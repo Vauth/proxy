@@ -10,34 +10,34 @@ class Providers:
         self.all_proxies = []
 
     def NovaProxy(self):
-        response = requests.get('https://api.proxynova.com/proxy/find?url=https://www.proxynova.com/proxy-server-list/country-cn/')
+        response = requests.get('https://api.proxynova.com/proxy/find?url=https://www.proxynova.com/proxy-server-list/country-cn/', verify=True)
         [self.all_proxies.append(f"{ii['ip']}:{ii['port']}") for ii in response.json()['proxies']]
         print("[+] Retrieved (NovaProxy)")
 
     def DitaProxy(self):
-        response = requests.get(f'https://api.ditatompel.com/v1/proxy/country/cn?page=1&limit=100')
+        response = requests.get(f'https://api.ditatompel.com/v1/proxy/country/cn?page=1&limit=100', verify=True)
         [self.all_proxies.append(i['type'].lower()+'://'+i['ip']+':'+str(i['port'])) for i in response.json()['data']['items']]
         print("[+] Retrieved (DitaProxy)")
 
     def ScrapeProxy(self):
-        response = requests.get('https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&country=cn&proxy_format=protocolipport&format=json')
+        response = requests.get('https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&country=cn&proxy_format=protocolipport&format=json', verify=True)
         [self.all_proxies.append(i['protocol'].lower()+'://'+i['ip']+':'+str(i['port'])) for i in response.json()['proxies']]
         print("[+] Retrieved (ScrapeProxy)")
 
     def EliteProxy(self):
-        nonce = re.search(r'"nonce":"(.*?)"', requests.get('https://proxyelite.info/free-proxy-list/').text).group(1)
+        nonce = re.search(r'"nonce":"(.*?)"', requests.get('https://proxyelite.info/free-proxy-list/', verify=True).text).group(1)
         filters = {"country": "China", "latency": 0, "page_size": 100, "page": 1}
-        response = requests.get(f'https://proxyelite.info/wp-admin/admin-ajax.php?action=proxylister_download&nonce={nonce}&format=txt&filter={filters}').text.splitlines()
+        response = requests.get(f'https://proxyelite.info/wp-admin/admin-ajax.php?action=proxylister_download&nonce={nonce}&format=txt&filter={filters}', verify=True).text.splitlines()
         [self.all_proxies.append('http://'+i) for i in response]
         print("[+] Retrieved (EliteProxy)")
 
     def FreeonlyProxy(self):
-        response = requests.get('https://proxyfreeonly.com/api/free-proxy-list?limit=500&page=1&country=CN&sortBy=lastChecked&sortType=desc')
+        response = requests.get('https://proxyfreeonly.com/api/free-proxy-list?limit=500&page=1&country=CN&sortBy=lastChecked&sortType=desc', verify=True)
         [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()]
         print("[+] Retrieved (Freeonly)")
 
     def PdbProxy(self):
-        response = requests.post('https://proxydb.net/list', data={'country': 'CN'})
+        response = requests.post('https://proxydb.net/list', data={'country': 'CN'}, verify=True)
         [self.all_proxies.append(i['type'].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['proxies']]
         print("[+] Retrieved (Pdb)")
 
