@@ -31,12 +31,24 @@ class Providers:
         [self.all_proxies.append('http://'+i) for i in response]
         print("[+] Retrieved (EliteProxy)")
 
+    def FreeonlyProxy(self):
+        response = requests.get('https://proxyfreeonly.com/api/free-proxy-list?limit=500&page=1&country=CN&sortBy=lastChecked&sortType=desc')
+        [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()]
+        print("[+] Retrieved (Freeonly)")
+
+    def PdbProxy(self):
+        response = requests.post('https://proxydb.net/list', data={'country': 'CN'})
+        [self.all_proxies.append(i['type'].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['proxies']]
+        print("[+] Retrieved (Pdb)")
+
     def Retrieve(self):
         try:
             self.NovaProxy()
             self.DitaProxy()
             self.EliteProxy()
             self.ScrapeProxy()
+            self.FreeonlyProxy()
+            self.PdbProxy()
         except:
             pass
 
