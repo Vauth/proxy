@@ -58,7 +58,8 @@ class Providers:
             self.FreeonlyProxy()
             self.PdbProxy()
             self.GeonodeProxy()
-        except:
+        except Exception as e:
+            print('\n[error] {}\n'.format(e))
             pass
 
         return self.all_proxies
