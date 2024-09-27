@@ -14,40 +14,40 @@ class Providers:
 
     def NovaProxy(self):
         response = requests.get('https://api.proxynova.com/proxy/find?url=https://www.proxynova.com/proxy-server-list/country-cn/', verify=False)
-        [self.all_proxies.append(f"{ii['ip']}:{ii['port']}") for ii in response.json()['proxies']]
-        print("[+] Retrieved (NovaProxy)")
+        count = [self.all_proxies.append(f"{ii['ip']}:{ii['port']}") for ii in response.json()['proxies']]
+        print("[+] Retrieved (NovaProxy) ({})".format(len(count)))
 
     def DitaProxy(self):
         response = requests.get(f'https://api.ditatompel.com/v1/proxy/country/cn?page=1&limit=100', verify=False)
-        [self.all_proxies.append(i['type'].lower()+'://'+i['ip']+':'+str(i['port'])) for i in response.json()['data']['items']]
-        print("[+] Retrieved (DitaProxy)")
+        count = [self.all_proxies.append(i['type'].lower()+'://'+i['ip']+':'+str(i['port'])) for i in response.json()['data']['items']]
+        print("[+] Retrieved (DitaProxy) ({})".format(len(count)))
 
     def ScrapeProxy(self):
         response = requests.get('https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&country=cn&proxy_format=protocolipport&format=json', verify=False)
-        [self.all_proxies.append(i['protocol'].lower()+'://'+i['ip']+':'+str(i['port'])) for i in response.json()['proxies']]
-        print("[+] Retrieved (ScrapeProxy)")
+        count = [self.all_proxies.append(i['protocol'].lower()+'://'+i['ip']+':'+str(i['port'])) for i in response.json()['proxies']]
+        print("[+] Retrieved (ScrapeProxy) ({})".format(len(count)))
 
     def EliteProxy(self):
         nonce = re.search(r'"nonce":"(.*?)"', requests.get('https://proxyelite.info/free-proxy-list/', verify=False).text).group(1)
         filters = {"country": "China", "latency": 0, "page_size": 100, "page": 1}
         response = requests.get(f'https://proxyelite.info/wp-admin/admin-ajax.php?action=proxylister_download&nonce={nonce}&format=txt&filter={filters}', verify=False).text.splitlines()
-        [self.all_proxies.append('http://'+i) for i in response]
-        print("[+] Retrieved (EliteProxy)")
+        count = [self.all_proxies.append('http://'+i) for i in response]
+        print("[+] Retrieved (EliteProxy) ({})".format(len(count)))
 
     def FreeonlyProxy(self):
         response = requests.get('https://proxyfreeonly.com/api/free-proxy-list?limit=500&page=1&country=CN&sortBy=lastChecked&sortType=desc', verify=False)
-        [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()]
-        print("[+] Retrieved (FreeonlyProxy)")
+        count = [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()]
+        print("[+] Retrieved (FreeonlyProxy) ({})".format(len(count)))
 
     def PdbProxy(self):
         response = requests.post('https://proxydb.net/list', data={'country': 'CN'}, verify=False)
-        [self.all_proxies.append(i['type'].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['proxies']]
-        print("[+] Retrieved (PdbProxy)")
+        count = [self.all_proxies.append(i['type'].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['proxies']]
+        print("[+] Retrieved (PdbProxy) ({})".format(len(count)))
 
     def GeonodeProxy(self):
         response = requests.get('https://proxylist.geonode.com/api/proxy-list?country=CN&limit=500&page=1&sort_by=lastChecked&sort_type=desc', verify=False)
-        [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['data']]
-        print("[+] Retrieved (GeonodeProxy)")
+        count = [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['data']]
+        print("[+] Retrieved (GeonodeProxy) ({})".format(len(count)))
 
     def Retrieve(self):
         try:
@@ -94,6 +94,7 @@ class ProxyChecker:
 
 # Run the main program
 proxies = (Providers()).Retrieve()
-print('\n[info] Total proxies: {}\n'.format(len(proxies)))
+print('\n[info] Total Proxies: {}\n'.format(len(proxies)))
 checker = (ProxyChecker(proxies)).Run()
+print('\n[report] Alive Proxies: {}\n'.format(len(checker)))
 with open('proxy.txt', 'w') as f: f.write('\n'.join(checker))
