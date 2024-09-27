@@ -45,7 +45,7 @@ class Providers:
         print("[+] Retrieved (PdbProxy)")
 
     def GeonodeProxy(self):
-        response = requests.get('https://proxylist.geonode.com/api/proxy-list?country=CN&limit=500&page=1&sort_by=lastChecked&sort_type=desc')
+        response = requests.get('https://proxylist.geonode.com/api/proxy-list?country=CN&limit=500&page=1&sort_by=lastChecked&sort_type=desc', verify=False)
         [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['data']]
         print("[+] Retrieved (GeonodeProxy)")
 
