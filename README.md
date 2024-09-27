@@ -1,5 +1,5 @@
 # Proxy Checker (CN)
-Proxy Scrapper + Checker (updates every 5 minutes).
+Proxy Scrapper + Checker (updates every 10 minutes).
 
 <br>
 
@@ -19,4 +19,4 @@ https://github.com/Vauth/proxy/raw/main/proxy.txt
 
 ### 📦 TODO:
 - [ ] Separation based on country.
-- [ ] More proxy providers.
+- [x] More proxy providers.
