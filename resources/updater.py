@@ -37,12 +37,17 @@ class Providers:
     def FreeonlyProxy(self):
         response = requests.get('https://proxyfreeonly.com/api/free-proxy-list?limit=500&page=1&country=CN&sortBy=lastChecked&sortType=desc', verify=False)
         [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()]
-        print("[+] Retrieved (Freeonly)")
+        print("[+] Retrieved (FreeonlyProxy)")
 
     def PdbProxy(self):
         response = requests.post('https://proxydb.net/list', data={'country': 'CN'}, verify=False)
         [self.all_proxies.append(i['type'].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['proxies']]
-        print("[+] Retrieved (Pdb)")
+        print("[+] Retrieved (PdbProxy)")
+
+    def GeonodeProxy(self):
+        response = requests.get('https://proxylist.geonode.com/api/proxy-list?country=CN&limit=500&page=1&sort_by=lastChecked&sort_type=desc')
+        [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['data']]
+        print("[+] Retrieved (GeonodeProxy)")
 
     def Retrieve(self):
         try:
@@ -52,6 +57,7 @@ class Providers:
             self.ScrapeProxy()
             self.FreeonlyProxy()
             self.PdbProxy()
+            self.GeonodeProxy()
         except:
             pass
 
