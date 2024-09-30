@@ -12,11 +12,6 @@ class Providers:
     def __init__(self):
         self.all_proxies = []
 
-    def NovaProxy(self):
-        response = requests.get('https://api.proxynova.com/proxy/find?url=https://www.proxynova.com/proxy-server-list/country-cn/', verify=False)
-        count = [self.all_proxies.append(f"{ii['ip']}:{ii['port']}") for ii in response.json()['proxies']]
-        print("[+] Retrieved (NovaProxy) ({})".format(len(count)))
-
     def DitaProxy(self):
         response = requests.get(f'https://api.ditatompel.com/v1/proxy/country/cn?page=1&limit=100', verify=False)
         count = [self.all_proxies.append(i['type'].lower()+'://'+i['ip']+':'+str(i['port'])) for i in response.json()['data']['items']]
@@ -51,7 +46,6 @@ class Providers:
 
     def Retrieve(self):
         try:
-            self.NovaProxy()
             self.DitaProxy()
             self.EliteProxy()
             self.ScrapeProxy()
