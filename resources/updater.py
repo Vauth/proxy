@@ -29,11 +29,6 @@ class Providers:
         count = [self.all_proxies.append('http://'+i) for i in response]
         print("[+] Retrieved (EliteProxy) ({})".format(len(count)))
 
-    def FreeonlyProxy(self):
-        response = requests.get('https://proxyfreeonly.com/api/free-proxy-list?limit=500&page=1&country=CN&sortBy=lastChecked&sortType=desc', verify=False)
-        count = [self.all_proxies.append(i['protocols'][0].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()]
-        print("[+] Retrieved (FreeonlyProxy) ({})".format(len(count)))
-
     def PdbProxy(self):
         response = requests.post('https://proxydb.net/list', data={'country': 'CN'}, verify=False)
         count = [self.all_proxies.append(i['type'].lower() + '://' + i['ip'] + ':' + str(i['port'])) for i in response.json()['proxies']]
@@ -49,7 +44,6 @@ class Providers:
             self.DitaProxy()
             self.EliteProxy()
             self.ScrapeProxy()
-            self.FreeonlyProxy()
             self.PdbProxy()
             self.GeonodeProxy()
         except Exception as e:
