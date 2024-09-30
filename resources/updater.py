@@ -53,7 +53,7 @@ class Providers:
             self.PdbProxy()
             self.GeonodeProxy()
         except Exception as e:
-            print('\n[error] {}\n'.format(e))
+            print('\n[unexpected] {}\n'.format(e))
             pass
 
         return self.all_proxies
