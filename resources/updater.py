@@ -48,7 +48,7 @@ class Providers:
             self.GeonodeProxy()
         except Exception as e:
             print('\n[unexpected] {}\n'.format(e))
-            pass
+            continue
 
         return self.all_proxies
 
