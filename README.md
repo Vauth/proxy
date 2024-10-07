@@ -1,5 +1,5 @@
-# Proxy Checker (CN)
-Proxy Scrapper + Checker (updates every 10 minutes).
+# Proxy Checker (AUE)
+Proxy Scrapper + Checker (updates every 20 minutes).
 
 <br>
 
