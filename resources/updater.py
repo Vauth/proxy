@@ -16,7 +16,7 @@ class Providers:
         with open('sources.txt', 'r') as file: proxylist = file.read().splitlines()
         for url in proxylist:
             try:
-                response = requests.get(url).text.splitlines()
+                response = requests.get(url, verify=False).text.splitlines()
                 count = [self.all_proxies.append(i) for i in response]
                 print("[+] Retrieved ({}) ({})".format(url.split('/')[3], len(count)))
             except Exception as e:
