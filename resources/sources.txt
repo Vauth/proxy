@@ -1,0 +1,4 @@
+https://raw.githubusercontent.com/mmpx12/proxy-list/refs/heads/master/proxies.txt
+https://raw.githubusercontent.com/monosans/proxy-list/refs/heads/main/proxies/all.txt
+https://raw.githubusercontent.com/proxifly/free-proxy-list/refs/heads/main/proxies/all/data.txt
+https://raw.githubusercontent.com/zevtyardt/proxy-list/refs/heads/main/all.txt
