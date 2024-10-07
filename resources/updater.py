@@ -13,7 +13,7 @@ class Providers:
         self.all_proxies = []
 
     def Github(self):
-        with open('sources.txt', 'r') as file: proxylist = file.read().splitlines()
+        with open('resources/sources.txt', 'r') as file: proxylist = file.read().splitlines()
         for url in proxylist:
             try:
                 response = requests.get(url, verify=False).text.splitlines()
