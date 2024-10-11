@@ -4,3 +4,5 @@ https://raw.githubusercontent.com/proxifly/free-proxy-list/refs/heads/main/proxi
 https://raw.githubusercontent.com/zevtyardt/proxy-list/refs/heads/main/all.txt
 https://raw.githubusercontent.com/officialputuid/KangProxy/refs/heads/KangProxy/xResults/RAW.txt
 https://raw.githubusercontent.com/elliottophellia/proxylist/refs/heads/master/results/pmix_checked.txt
+https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/refs/heads/master/http.txt
+https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/refs/heads/main/http.txt
