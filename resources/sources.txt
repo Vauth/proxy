@@ -6,3 +6,4 @@ https://raw.githubusercontent.com/officialputuid/KangProxy/refs/heads/KangProxy/
 https://raw.githubusercontent.com/elliottophellia/proxylist/refs/heads/master/results/pmix_checked.txt
 https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/refs/heads/master/http.txt
 https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/refs/heads/main/http.txt
+https://raw.githubusercontent.com/vakhov/fresh-proxy-list/refs/heads/master/http.txt
