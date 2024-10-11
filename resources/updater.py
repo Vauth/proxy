@@ -17,7 +17,7 @@ class Providers:
         for url in proxylist:
             try:
                 response = requests.get(url, verify=False).text.splitlines()
-                count = [self.all_proxies.append(i) for i in response]
+                count = [self.all_proxies.append(i if '://' in i else 'http://' + i) for i in response]
                 print("[+] Retrieved ({}) ({})".format(url.split('/')[3], len(count)))
             except Exception as e:
                 print('[unexpected] {}'.format(e))
@@ -57,8 +57,8 @@ class ProxyChecker:
         return self.valid_proxies
 
 # Run the main program
-proxies = (Providers()).Retrieve()
-print('\n[info] Total Proxies: {}\n'.format(len(proxies)))
+proxies = list(set((Providers()).Retrieve()))
+print('\n[info] Total Proxies: {} (without duplicates)\n'.format(len(proxies)))
 checker = (ProxyChecker(proxies)).Run()
 print('\n[info] Alive Proxies: {}\n'.format(len(checker)))
 with open('proxy.txt', 'w') as f: f.write('\n'.join(checker))
