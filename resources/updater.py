@@ -44,7 +44,7 @@ class ProxyChecker:
                 return True
             else:
                 return False
-        except requests.RequestException:
+        except Exception:
             return False
 
     def Run(self):
