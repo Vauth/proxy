@@ -7,3 +7,7 @@ https://raw.githubusercontent.com/elliottophellia/proxylist/refs/heads/master/re
 https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/refs/heads/master/http.txt
 https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/refs/heads/main/http.txt
 https://raw.githubusercontent.com/vakhov/fresh-proxy-list/refs/heads/master/http.txt
+https://raw.githubusercontent.com/Anonym0usWork1221/Free-Proxies/refs/heads/main/proxy_files/http_proxies.txt
+https://raw.githubusercontent.com/TheSpeedX/PROXY-List/refs/heads/master/http.txt
+https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/refs/heads/main/free.txt
+https://raw.githubusercontent.com/ProxyScraper/ProxyScraper/refs/heads/main/http.txt
