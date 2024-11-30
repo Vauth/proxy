@@ -11,3 +11,4 @@ https://raw.githubusercontent.com/Anonym0usWork1221/Free-Proxies/refs/heads/main
 https://raw.githubusercontent.com/TheSpeedX/PROXY-List/refs/heads/master/http.txt
 https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/refs/heads/main/free.txt
 https://raw.githubusercontent.com/ProxyScraper/ProxyScraper/refs/heads/main/http.txt
+https://raw.githubusercontent.com/gitrecon1455/ProxyScraper/refs/heads/main/proxies.txt
